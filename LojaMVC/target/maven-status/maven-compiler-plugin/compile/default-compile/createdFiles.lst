@@ -2,6 +2,7 @@ model\GenericDAO.class
 dal\ConexaoBD.class
 controller\LoginController.class
 model\LoginDAO.class
+controller\PrincipalController.class
 module-info.class
 model\Usuario.class
 principal\App.class
