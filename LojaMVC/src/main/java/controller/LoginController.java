@@ -17,9 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.LoginDAO;
 import model.Usuario;
+import util.AlertaUtil;
 
 public class LoginController {
 
@@ -29,6 +32,9 @@ public class LoginController {
     private ArrayList<String> listaDados;
     private Usuario user;
 
+    @FXML
+    private ImageView imgBancoOnline;
+    
     @FXML
     private Button bntFechar;
 
@@ -59,38 +65,62 @@ public class LoginController {
     }
 
     public void verificarBanco() {
-        this.conexao = ConexaoBD.conectar();
+//        this.conexao = ConexaoBD.conectar();
+//
+//        if (this.conexao != null) {
+//            System.out.println("Conectou no banco de dados");
+//        } else {
+//            System.out.println("Problemas na conexão com o banco de dados");
+//        }
+    
+//    if(dao.bancoOnline()){
+//        lblDB.setText("Banco de Dados: Online");
+//        lblDB.setStyle("-fx-text-fill: blue;");
+//    } else {
+//        lblDB.setText("Banco de Dados: Offline");
+//        lblDB.setStyle("-fx-text-fill: red;");
+//    }
 
-        if (this.conexao != null) {
-            System.out.println("Conectou no banco de dados");
-        } else {
-            System.out.println("Problemas na conexão com o banco de dados");
-        }
+       if(dao.bancoOnline()){
+           File arquivo = new File("src/main/resources/icones/dbok.png");
+           Image imagem = new Image(arquivo.toURI().toString());
+           imgBancoOnline.setImage(imagem);
+       } else {
+           File arquivo = new File("src/main/resources/icones/dberror.png");
+           Image imagem = new Image(arquivo.toURI().toString());
+           imgBancoOnline.setImage(imagem);
+       }
 
     }
 
     public void abrirJanela() {
+        bntLogar.setDefaultButton(true);
         verificarBanco();
     }
 
     public void processarLogin() throws IOException, SQLException {
         if (!dao.bancoOnline()) {
-            System.out.println("Banco de dados desconectado!");
+//            System.out.println("Banco de dados desconectado!");
+            AlertaUtil.mostrarErro("Erro", "Banco de dados desconectado!");
         } else if (txtUsuario.getText() != null && !txtUsuario.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
             listaDados = autenticar(txtUsuario.getText(),
                     txtSenha.getText());
             if (listaDados != null) {
-                System.out.println("Bem vindo "
-                        + listaDados.get(0) + " acesso liberado!");
+//                System.out.println("Bem vindo "
+//                        + listaDados.get(0) + " acesso liberado!");
+                AlertaUtil.mostrarInformacao("Informação", "Bem vindo "
+                        + listaDados.get(0) + " acesso liberado!" );
                 if (stageLogin != null) {
                     stageLogin.close();
                 }
                 abrirTelaPrincipal(listaDados);
             } else {
-                System.out.println("Usuário e senha invalidos!");
+//                System.out.println("Usuário e senha invalidos!");
+                  AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");
             }
         } else {
-            System.out.println("Verifique as informações!");
+//            System.out.println("Verifique as informações!");
+                AlertaUtil.mostrarErro("Erro", "Verifique as informações!");
         }
 
     }
