@@ -1,9 +1,10 @@
 controller\PrincipalController.class
 model\Usuario.class
 principal\App.class
-dal\ConexaoBD.class
 model\GenericDAO.class
+dal\ConexaoBD.class
 controller\LoginController.class
 model\LoginDAO.class
 module-info.class
+controller\ListagemUsuariosController.class
 util\AlertaUtil.class

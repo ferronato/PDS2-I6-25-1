@@ -150,6 +150,9 @@ public class LoginController {
         });
 
         Scene scene = new Scene(root);
+        
+        Image icone = new Image(getClass().getResourceAsStream("/icones/loja.png"));
+        telaPrincipal.getIcons().add(icone);
 
         telaPrincipal.setTitle("Tela principal do Sistema");
         telaPrincipal.setScene(scene);
