@@ -1,8 +1,8 @@
 controller\PrincipalController.class
 model\Usuario.class
 principal\App.class
-model\GenericDAO.class
 dal\ConexaoBD.class
+model\GenericDAO.class
 controller\LoginController.class
 model\LoginDAO.class
 module-info.class

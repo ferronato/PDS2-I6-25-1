@@ -4,13 +4,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.ListagemUsuariosController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListagemUsuariosController">
    <children>
-      <Button fx:id="btnCadastrar" layoutX="110.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnCadastrarClick" text="Cadastrar" />
-      <TextField fx:id="txtPesquisar" layoutX="191.0" layoutY="82.0" prefHeight="25.0" prefWidth="348.0" />
-      <TableView fx:id="tabelaUsuarios" layoutX="110.0" layoutY="116.0" prefHeight="200.0" prefWidth="429.0" />
-      <Button fx:id="btnFechar" layoutX="313.0" layoutY="342.0" mnemonicParsing="false" onAction="#btnFecharClick" text="Fechar" />
+      <Button fx:id="btnCadastrar" layoutX="81.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnCadastrarClick" prefHeight="30.0" prefWidth="110.0" text="Cadastrar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <TextField fx:id="txtPesquisar" layoutX="206.0" layoutY="53.0" prefHeight="25.0" prefWidth="327.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TableView fx:id="tabelaUsuarios" layoutX="79.0" layoutY="116.0" prefHeight="200.0" prefWidth="460.0" />
+      <Button fx:id="btnFechar" layoutX="270.0" layoutY="335.0" mnemonicParsing="false" onAction="#btnFecharClick" prefHeight="30.0" prefWidth="110.0" text="Fechar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>
