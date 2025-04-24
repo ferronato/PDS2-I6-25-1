@@ -7,4 +7,5 @@ controller\LoginController.class
 model\LoginDAO.class
 module-info.class
 controller\ListagemUsuariosController.class
+model\UsuarioDAO.class
 util\AlertaUtil.class

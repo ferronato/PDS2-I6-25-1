@@ -3,6 +3,7 @@ C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\module-info.jav
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\util\AlertaUtil.java
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\model\Usuario.java
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\model\GenericDAO.java
+C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\model\UsuarioDAO.java
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\controller\PrincipalController.java
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\controller\LoginController.java
 C:\Mac\Home\Documents\NetBeansProjects\LojaMVC1704\src\main\java\dal\ConexaoBD.java

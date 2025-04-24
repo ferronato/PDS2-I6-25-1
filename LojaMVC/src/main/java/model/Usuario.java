@@ -1,120 +1,150 @@
 package model;
 
+import java.io.Serializable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final StringProperty nome = new SimpleStringProperty();
-    private final StringProperty fone = new SimpleStringProperty();
-    private final StringProperty login = new SimpleStringProperty();
-    private final StringProperty senha = new SimpleStringProperty();
-    private final StringProperty perfil = new SimpleStringProperty();
+    private int id;
+    private String nome;
+    private String fone;
+    private String login;
+    private String senha;
+    private String perfil;
 
     // Método construtor com todos os parâmetros
     public Usuario(int id, String nome, String fone, String login, String senha, String perfil) {
-        this.id.set(id);
-        this.nome.set(nome);
-        this.fone.set(fone);
-        this.login.set(login);
-        this.senha.set(senha);
-        this.perfil.set(perfil);
+        this.id = id;
+        this.nome = nome;
+        this.fone = fone;
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
     }
 
     // Método construtor com todos os parâmetros menos ID
     public Usuario(String nome, String fone, String login, String senha, String perfil) {
-        this.nome.set(nome);
-        this.fone.set(fone);
-        this.login.set(login);
-        this.senha.set(senha);
-        this.perfil.set(perfil);
+        this.nome = nome;
+        this.fone = fone;
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
     }
 
     // Método construtor para o login
     public Usuario(String login, String senha, String perfil) {
-        this.login.set(login);
-        this.senha.set(senha);
-        this.perfil.set(perfil);
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
     }
 
-    // Método construtor sem parâmetros
     public Usuario() {
 
     }
 
-    public IntegerProperty idProperty() {
+    public int getId() {
         return id;
     }
 
-    public int getId() {
-        return id.get();
-    }
-
     public void setId(int id) {
-        this.id.set(id);
-    }
-
-    public StringProperty nomeProperty() {
-        return nome;
+        this.id = id;
     }
 
     public String getNome() {
-        return nome.get();
+        return nome;
     }
 
     public void setNome(String nome) {
-        this.nome.set(nome);
-    }
-
-    public StringProperty foneProperty() {
-        return fone;
+        this.nome = nome;
     }
 
     public String getFone() {
-        return fone.get();
+        return fone;
     }
 
     public void setFone(String fone) {
-        this.fone.set(fone);
-    }
-
-    public StringProperty loginProperty() {
-        return login;
+        this.fone = fone;
     }
 
     public String getLogin() {
-        return login.get();
+        return login;
     }
 
     public void setLogin(String login) {
-        this.login.set(login);
-    }
-
-    public StringProperty senhaProperty() {
-        return senha;
+        this.login = login;
     }
 
     public String getSenha() {
-        return senha.get();
+        return senha;
     }
 
     public void setSenha(String senha) {
-        this.senha.set(senha);
-    }
-
-    public StringProperty perfilProperty() {
-        return perfil;
+        this.senha = senha;
     }
 
     public String getPerfil() {
-        return perfil.get();
+        return perfil;
     }
 
     public void setPerfil(String perfil) {
-        this.perfil.set(perfil);
+        this.perfil = perfil;
+    }
+
+    private transient IntegerProperty idProperty;
+
+    public IntegerProperty idProperty() {
+        if (idProperty == null) {
+            idProperty = new SimpleIntegerProperty(id);
+        }
+        return idProperty;
+    }
+
+    private transient StringProperty nomeProperty;
+
+    public StringProperty nomeProperty() {
+        if (nomeProperty == null) {
+            nomeProperty = new SimpleStringProperty(nome);
+        }
+        return nomeProperty;
+    }
+
+    private transient StringProperty foneProperty;
+
+    public StringProperty foneProperty() {
+        if (foneProperty == null) {
+            foneProperty = new SimpleStringProperty(fone);
+        }
+        return foneProperty;
+    }
+
+    private transient StringProperty loginProperty;
+
+    public StringProperty loginProperty() {
+        if (loginProperty == null) {
+            loginProperty = new SimpleStringProperty(login);
+        }
+        return loginProperty;
+    }
+
+    private transient StringProperty senhaProperty;
+
+    public StringProperty senhaProperty() {
+        if (senhaProperty == null) {
+            senhaProperty = new SimpleStringProperty(senha);
+        }
+        return senhaProperty;
+    }
+
+    private transient StringProperty perfilProperty;
+
+    public StringProperty perfilProperty() {
+        if (perfilProperty == null) {
+            perfilProperty = new SimpleStringProperty(perfil);
+        }
+        return perfilProperty;
     }
 
 }
