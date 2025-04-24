@@ -100,14 +100,11 @@ public class LoginController {
 
     public void processarLogin() throws IOException, SQLException {
         if (!dao.bancoOnline()) {
-//            System.out.println("Banco de dados desconectado!");
             AlertaUtil.mostrarErro("Erro", "Banco de dados desconectado!");
         } else if (txtUsuario.getText() != null && !txtUsuario.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
             listaDados = autenticar(txtUsuario.getText(),
                     txtSenha.getText());
             if (listaDados != null) {
-//                System.out.println("Bem vindo "
-//                        + listaDados.get(0) + " acesso liberado!");
                 AlertaUtil.mostrarInformacao("Informação", "Bem vindo "
                         + listaDados.get(0) + " acesso liberado!" );
                 if (stageLogin != null) {
