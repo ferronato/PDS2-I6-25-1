@@ -15,6 +15,7 @@ import util.AlertaUtil;
 public class CadastroUsuariosController {
     Stage stageCadastroUsuarios;
     Usuario usuarioSelecionado;
+    private Runnable onUsuarioSalvo; //Este é o callback
     
       @FXML
     private Button btnExcluir;
@@ -57,7 +58,9 @@ public class CadastroUsuariosController {
             txtTelefone.getText(), txtLogin.getText(),
             txtSenha.getText(), cbPerfil.getValue());
         } else {
-            
+            alterar(usuarioSelecionado.getId(), txtNome.getText(),
+                    txtTelefone.getText(), txtLogin.getText(),
+                    txtSenha.getText(), cbPerfil.getValue());
         }
     }
 
@@ -68,13 +71,19 @@ public class CadastroUsuariosController {
     
     void ajustarElementosJanela(Usuario user){
         this.usuarioSelecionado = user;
-        if(user == null){
+        if(user == null){ //Incluir
             txtNome.requestFocus();
             btnExcluir.setVisible(false);
             btnIncluirAlterar.setText("Salvar");
             cbPerfil.getItems().addAll("admin", "user");
         } else {
-            System.out.println("Estamos alterando ou excluindo..");
+            btnIncluirAlterar.setText("Editar");
+            txtNome.setText(user.getNome());
+            txtTelefone.setText(user.getFone());
+            txtLogin.setText(user.getLogin());
+            txtSenha.setText(user.getSenha());
+            cbPerfil.getItems().addAll("admin", "user");
+            cbPerfil.setValue(user.getPerfil());
         }
     }
 
@@ -86,6 +95,23 @@ public class CadastroUsuariosController {
         AlertaUtil.mostrarInformacao("Informação",
                 "Registro inserido com sucesso!");
         stageCadastroUsuarios.close();
+    }
+    
+    void alterar(int id, String nome, String fone, String login,
+            String senha, String perfil) throws SQLException{
+        Usuario usuarioAlterado = new Usuario(id, nome, fone, login,
+        senha, perfil);
+        new UsuarioDAO().alterar(usuarioAlterado);
+        if(onUsuarioSalvo != null){
+            onUsuarioSalvo.run();
+        }
+         AlertaUtil.mostrarInformacao("Informação",
+                "Registro alterado com sucesso!");
+        stageCadastroUsuarios.close();
+    }
+    
+    public void setOnUsuarioSalvo(Runnable callback){
+        this.onUsuarioSalvo = callback;
     }
     
 }
