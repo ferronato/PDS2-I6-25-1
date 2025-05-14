@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListagemUsuariosController">
    <children>
-      <Button fx:id="btnCadastrar" layoutX="81.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnCadastrarClick" prefHeight="30.0" prefWidth="110.0" text="Cadastrar">
+      <Button fx:id="btnCadastrar" layoutX="65.0" layoutY="53.0" mnemonicParsing="false" onAction="#btnCadastrarClick" prefHeight="30.0" prefWidth="110.0" text="Cadastrar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -16,8 +16,8 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TableView fx:id="tabelaUsuarios" layoutX="79.0" layoutY="116.0" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="460.0" />
-      <Button fx:id="btnFechar" layoutX="270.0" layoutY="335.0" mnemonicParsing="false" onAction="#btnFecharClick" prefHeight="30.0" prefWidth="110.0" text="Fechar">
+      <TableView fx:id="tabelaUsuarios" layoutX="65.0" layoutY="114.0" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="470.0" />
+      <Button fx:id="btnFechar" layoutX="245.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnFecharClick" prefHeight="30.0" prefWidth="110.0" text="Fechar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
