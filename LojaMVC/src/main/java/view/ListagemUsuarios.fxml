@@ -16,7 +16,7 @@
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TableView fx:id="tabelaUsuarios" layoutX="65.0" layoutY="114.0" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="470.0" />
+      <TableView fx:id="tabelaUsuarios" layoutX="65.0" layoutY="114.0" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="470.0" stylesheets="@../../resources/css/tabelas.css" />
       <Button fx:id="btnFechar" layoutX="245.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnFecharClick" prefHeight="30.0" prefWidth="110.0" text="Fechar">
          <font>
             <Font name="System Bold" size="12.0" />

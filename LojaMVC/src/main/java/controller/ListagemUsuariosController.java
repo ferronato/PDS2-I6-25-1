@@ -6,6 +6,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,7 @@ public class ListagemUsuariosController {
 
     Stage stageListagemUsuarios;
     Usuario usuario;
+    ObservableList<Usuario> lista;
 
     @FXML
     private Button btnCadastrar;
@@ -53,6 +56,14 @@ public class ListagemUsuariosController {
         telaCadastroUsuarios.setOnShown(evento -> {
             cadc.ajustarElementosJanela(null);
         });
+        
+        cadc.setOnUsuarioSalvo(() -> {
+            try{
+                carregarUsuariosTabela();
+            } catch (SQLException ex){
+                
+            }
+        });
 
         Scene scene = new Scene(root);
 
@@ -76,8 +87,7 @@ public class ListagemUsuariosController {
 
     //Método para listar usuarios no TableView
     private void carregarUsuariosTabela() throws SQLException {
-        ObservableList<Usuario> lista
-                = FXCollections.observableArrayList(listarUsuarios());
+        lista = FXCollections.observableArrayList(listarUsuarios());
         if (!lista.isEmpty()) {
             tabelaUsuarios.getColumns().clear();
 
@@ -111,7 +121,27 @@ public class ListagemUsuariosController {
                     colunaNome, colunaFone, colunaLogin,
                     colunaPerfil);
 
-            tabelaUsuarios.setItems(lista);
+//            tabelaUsuarios.setItems(lista);
+            FilteredList<Usuario> listaFiltrada = new
+                FilteredList<>(lista, p -> true);
+            
+            txtPesquisar.textProperty().addListener((obs, oldVal, newVal) -> {
+                listaFiltrada.setPredicate(usuario -> {
+                    if(newVal == null || newVal.isEmpty()){
+                        return true;
+                    }
+                    String filtro = newVal.toLowerCase();
+                    return usuario.getNome().toLowerCase().contains(filtro)
+                            || usuario.getLogin().toLowerCase().contains(filtro)
+                            || usuario.getFone().toLowerCase().contains(filtro)
+                            || usuario.getPerfil().toLowerCase().contains(filtro);
+                });
+            });
+                SortedList<Usuario> listaOrdenada = new SortedList<>(listaFiltrada);
+                listaOrdenada.comparatorProperty().
+                        bind(tabelaUsuarios.comparatorProperty());
+                tabelaUsuarios.setItems(listaOrdenada);
+
         } else {
             AlertaUtil.mostrarErro("Erro", "Erro ao carregar usuários");
         }
@@ -141,6 +171,14 @@ public class ListagemUsuariosController {
                 telaCadastroUsuarios.setOnShown(evento -> {
                     cadc.ajustarElementosJanela(this.usuario);
                 });
+                
+                cadc.setOnUsuarioSalvo(() -> {
+                    try{
+                        atualizarUsuariosTabela();
+                    } catch (SQLException ex){
+                        
+                    }
+                });
 
                 Scene scene = new Scene(root);
 
@@ -149,6 +187,11 @@ public class ListagemUsuariosController {
                 telaCadastroUsuarios.show();
             }
         }
+    }
+    
+    private void atualizarUsuariosTabela() throws SQLException{
+        lista = FXCollections.observableArrayList(listarUsuarios());
+        tabelaUsuarios.setItems(lista); //Vem do BD
     }
 
 }

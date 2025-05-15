@@ -1,9 +1,11 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -42,8 +44,15 @@ public class CadastroUsuariosController {
     private TextField txtTelefone;
 
     @FXML
-    void btnExcluirClick(ActionEvent event) {
-
+    void btnExcluirClick(ActionEvent event) throws SQLException {
+        Optional<ButtonType> resultado = AlertaUtil.mostrarConfirmacao("Atenção",
+                "Tem certeza que quer excluir o registro?");
+        if(resultado.isPresent()){
+            ButtonType botaoPressionado = resultado.get();
+            if(botaoPressionado == ButtonType.OK){
+                excluir(usuarioSelecionado.getId());
+            }
+        }
     }
 
     @FXML
@@ -92,6 +101,9 @@ public class CadastroUsuariosController {
         Usuario usuario = new Usuario(nome, fone, login,
         senha, perfil);
         new UsuarioDAO().salvar(usuario);
+        if(onUsuarioSalvo != null){
+            onUsuarioSalvo.run();
+        }
         AlertaUtil.mostrarInformacao("Informação",
                 "Registro inserido com sucesso!");
         stageCadastroUsuarios.close();
@@ -112,6 +124,16 @@ public class CadastroUsuariosController {
     
     public void setOnUsuarioSalvo(Runnable callback){
         this.onUsuarioSalvo = callback;
+    }
+    
+    public void excluir(int id) throws SQLException{
+        new UsuarioDAO().excluir(id);
+         if(onUsuarioSalvo != null){
+            onUsuarioSalvo.run();
+        }
+         AlertaUtil.mostrarInformacao("Informação", 
+                 "Registro excluído com sucesso!");
+         stageCadastroUsuarios.close();
     }
     
 }
